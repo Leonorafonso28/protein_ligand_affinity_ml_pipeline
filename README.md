@@ -119,30 +119,30 @@ protein-ligand-binding-affinity-database-&-ML-pipeline
 │
 ├── src/                          # Source code
 │   ├── data_preparation/         # Stepwise scripts organized by pipeline steps
-│   │   ├── 00_validation_pdbs/
-│   │   ├── 01_download_pdbs/
-│   │   ├── 02_clean_pdb_and_cif_files/
-│   │   ├── 03_clean_ent_files/
-│   │   ├── 04_convert_cif_to_ent/
-│   │   ├── 05_split_ent_by_chain_ambiguos/
-│   │   ├── 06_filter_ligands_get_smiles/
-│   │   ├── 07_filtered_proteins/
-│   │   └── 08_filtering_fasta_ent_files/
+│   │   ├── 00_validation_pdbs.py/
+│   │   ├── 01_download_pdbs.py/
+│   │   ├── 02_clean_pdb_and_cif_files.py/
+│   │   ├── 03_clean_ent_files.py/
+│   │   ├── 04_convert_cif_to_ent.py/
+│   │   ├── 05_split_ent_by_chain_ambiguos.py/
+│   │   ├── 06_filter_ligands_get_smiles.py/
+│   │   ├── 07_filtered_proteins.py/
+│   │   └── 08_filtering_fasta_ent_files.py/
 │   │
 │   ├── features/                    # Code for embeddings, descriptors and activities
-│   │   ├── 09_chembl_bioactivities/
+│   │   ├── 09_chembl_bioactivities.py/
 │   │   ├── 10_filter_chembl/
 |   |   |   ├── pki
 │   │   |   └── pchemb/
-│   │   └── 11_feature_ligand_protein_extraction/
+│   │   └── 11_feature_ligand_protein_extraction.py/
 |   |       ├── pki
 │   │       └── pchemb/ 
 |   | 
 │   ├── preprocessing/                    # Scripts for preprocessing the data for ML models
-│   │   ├── 12_preprocessing_features/
+│   │   ├── 12_preprocessing_features.py/
 |   |   |   ├── pki
 │   │   |   └── pchemb/
-│   │   └── 13_train_test_split/  
+│   │   └── 13_train_test_split.py/  
 |   |       ├── pki
 │   │       └── pchemb/           
 │   │
