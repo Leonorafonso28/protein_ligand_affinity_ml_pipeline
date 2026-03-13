@@ -15,7 +15,3 @@ venv/
 
 # OS files
 .DS_Store
-
-# Logs / data
-*.log
-data/
