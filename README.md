@@ -155,11 +155,11 @@ protein-ligand-binding-affinity-database-&-ML-pipeline
 │           └── pchemb/         
 │
 ├── pipelines/                    # Scripts to run full or partial pipelines
-│   ├── run_data_preparation_pipeline.py
-│   ├── run_features_pipeline.py
-|   ├── run_preprocessing_pipeline.py
-|   ├── run_models_pipeline.py
-│   └── run_full_pipeline.py                  
+│   ├── pipeline_data_preparation.py
+│   ├── pipeline_features.py.py
+|   ├── pipeline_preprocessing.py
+|   ├── pipeline_models.py
+│   └── pipeline_run_all.py                  
 │
 ├── notebooks/                     # Jupyter notebooks for EDA or visualization
 │   ├── exploratory_data_analysis.ipynb
@@ -229,17 +229,33 @@ All models are evaluated on five held-out partitions (validation is used only du
 
 ## **Quick Start**
 
-Clone the repository:
+## Quick Start
 
-git clone https://github.com/yourname/protein-ligand-affinity-ml-pipeline
+### 1. Clone the repository
+git clone https://github.com/<your-username>/protein-ligand-binding-affinity-database-&-ML-pipeline
+cd protein-ligand-binding-affinity-database-&-ML-pipeline
 
-Install dependencies:
+### 2. Set up the environment
 
+**Option A — Conda:**
+conda env create -f environment.yml
+conda activate protein_ligand_affinity
+
+**Option B — pip:**
 pip install -r requirements.txt
 
-Run the full pipeline:
+### 3. Run the full pipeline
+python pipelines/pipeline_run_all.py
 
-python pipelines/run_full_pipeline.py
+### Or run individual stages:
+python pipelines/pipeline_data_preparation.py   # Data preparation
+python pipelines/pipeline_features.py           # Feature extraction
+python pipelines/pipeline_preprocessing.py      # Preprocessing
+python pipelines/pipeline_models.py             # ML models
+
+### 4. (Optional) Run with Docker
+docker build -t protein-ligand-affinity .
+docker run protein-ligand-affinity
 
 ## **Future Work**
 

@@ -1,0 +1,120 @@
+# 12_01_preprocessing_features_pchembl.py
+# 12_02_preprocessing_features_pki.py
+preprocessing:
+  pchembl:
+    input_file: data/features/features_combined_ligand_protein_pchembl.csv
+    output_file: data/processed/features_processed_pchembl.csv
+  pki:
+    input_file: data/features/features_combined_ligand_protein_pKi.csv
+    output_file: data/processed/features_processed_pKi.csv
+
+  organism_filter: "Homo sapiens"        # Keep only entries where PDB Organism == ChEMBL target_organism == this value
+  remove_nan_columns: true               # Drop any feature column containing NaN values
+  remove_zero_variance: true             # Drop any feature column with zero variance
+
+  metadata_columns:                      # Non-feature columns to preserve alongside features
+    - "PDB ID"
+    - "Chain ID"
+    - "UniProt_ID"
+    - "PDB_Start"
+    - "PDB_End"
+    - "UniProt_Start"
+    - "UniProt_End"
+    - "LIGAND_ID"
+    - "LIGAND_TYPE"
+    - "POSITIONS"
+    - "NAME"
+    - "SEQUENCE_3L_STD"
+    - "SEQUENCE_1L"
+    - "CANONICAL_SMILES"
+    - "INCHIKEY"
+    - "PDB_ID"
+    - "Experimental_Method"
+    - "Resolution"
+    - "Organism"
+    - "molecule_chembl_id"
+    - "target_chembl_id"
+    - "assay_type"
+    - "pchembl_value"
+    - "relation"
+    - "standard_relation"
+    - "standard_units"
+    - "standard_value"
+    - "target_organism"
+    - "type"
+    - "units"
+    - "value"
+    - "target_type"
+    - "pKi"
+    - "PDB_coverage"
+    - "z"
+    - "z_reason"
+
+# 13_01_train_test_split_pchembl.py
+# 13_02_train_test_split_pki.py
+splitting:
+  pchembl:
+    input_file: data/processed/features_processed_pchembl.csv
+    target_column: pchembl_value
+    output_dir: data/processed/features_processed_pchembl/
+  pki:
+    input_file: data/processed/features_processed_pKi.csv
+    target_column: pKi
+    output_dir: data/processed/features_processed_pki/
+
+  random_seed: 42
+
+  # Blind set sampling — fraction of unique SMILES and sequences held out
+  blind_fraction: 0.15                   # Note: comment in code says 5% but code uses 15%
+
+  # Train / val / test split (applied to the remaining data after blind removal)
+  test_size: 0.10                        # 10% of remaining data → test
+  val_size: 0.1111                       # ~10% of train+val → val (results in ~80/10/10 split overall)
+
+  # Columns to drop before model input (metadata + target columns)
+  drop_columns:
+    - "pKi"
+    - "pair_key"
+    - "PDB ID"
+    - "Chain ID"
+    - "UniProt_ID"
+    - "PDB_Start"
+    - "PDB_End"
+    - "UniProt_Start"
+    - "UniProt_End"
+    - "LIGAND_ID"
+    - "LIGAND_TYPE"
+    - "POSITIONS"
+    - "NAME"
+    - "SEQUENCE_3L_STD"
+    - "SEQUENCE_1L"
+    - "CANONICAL_SMILES"
+    - "INCHIKEY"
+    - "PDB_ID"
+    - "Experimental_Method"
+    - "Resolution"
+    - "Organism"
+    - "molecule_chembl_id"
+    - "target_chembl_id"
+    - "assay_type"
+    - "pchembl_value"
+    - "relation"
+    - "standard_relation"
+    - "standard_units"
+    - "standard_value"
+    - "target_organism"
+    - "type"
+    - "units"
+    - "value"
+    - "target_type"
+    - "PDB_coverage"
+    - "z"
+    - "z_reason"
+    - "UniProt_Start.1"
+    - "UniProt_End.1"
+    - "standard_value.1"
+    - "value.1"
+    - "pKi.1"
+    - "pchembl_value.1"
+
+  scaler: StandardScaler                 # Scaler applied to X sets after splitting

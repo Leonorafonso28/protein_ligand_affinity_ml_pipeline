@@ -1,0 +1,68 @@
+# Shared settings across all models
+shared:
+  random_seed: 42
+  activity_threshold: 6.5               # Binarization threshold: active (1) if value >= 6.5, else inactive (0)
+  classification_threshold: 0.5         # Probability threshold for converting predicted probabilities to binary labels
+  optimization_metric: f1               # Metric to maximize during Optuna hyperparameter search
+  n_trials: 400                         # Number of Optuna trials per study
+  early_stopping_patience: 10           # Epochs without improvement before early stopping (DNN only)
+  early_stopping_monitor: val_loss
+ 
+# 14_XGBoost_pki.py / 15_XGBoost_pki_evaluation.py
+xgboost:
+  pki:
+    input_dir: data/models/xgboost_pki/
+    best_params_file: data/models/xgboost_pki/best_xgboost_hyperparams_pki_classification.json
+    model_file: data/models/xgboost_pki/xgboost_pki_classifier.pkl
+    well_predicted_file: data/models/xgboost_pki/well_predicted_blind_features.csv
+    target_column: pKi
+ 
+  pchembl:
+    input_dir: data/models/xgboost_pchembl/
+    best_params_file: data/models/xgboost_pchembl/best_xgboost_hyperparams_pchembl_classification.json
+    model_file: data/models/xgboost_pchembl/xgboost_pchembl_classifier.pkl
+    well_predicted_file: data/models/xgboost_pchembl/well_predicted_blind_features.csv
+    target_column: pchembl_value
+ 
+  # Optuna search space
+  search_space:
+    objective: binary:logistic
+    eval_metric: logloss
+    lambda: [1.0e-5, 1.0]              # L2 regularization (log scale)
+    alpha: [1.0e-5, 1.0]               # L1 regularization (log scale)
+    colsample_bytree: [0.5, 1.0]
+    subsample: [0.5, 1.0]
+    learning_rate: [0.01, 0.1]
+    max_depth: [3, 10]
+    min_child_weight: [1, 10]
+    n_estimators: [100, 1000]
+ 
+# 18_DNN_pki.py / 19_DNN_pki_evaluation.py
+# 20_DNN_pchembl.py / 21_DNN_pchembl_evaluation.py
+dnn:
+  pki:
+    input_dir: data/models/dnn_pki/
+    best_params_file: data/models/dnn_pki/best_DNN_hyperparams_pki_classification.json
+    well_predicted_file: data/models/dnn_pki/well_predicted_blind_features.csv
+    target_column: pKi
+ 
+  pchembl:
+    input_dir: data/models/dnn_pchembl/
+    best_params_file: data/models/dnn_pchembl/best_DNN_hyperparams_pchembl_classification.json
+    well_predicted_file: data/models/dnn_pchembl/well_predicted_blind_features.csv
+    target_column: pchembl_value
+ 
+  # Optuna search space
+  search_space:
+    n_layers: [1, 5]
+    activations: ["relu", "tanh", "elu"]
+    weight_decay: [1.0e-6, 1.0e-2]    # L2 regularization (log scale)
+    units_per_layer: [16, 128]
+    dropout_per_layer: [0.0, 0.5]
+    learning_rate: [1.0e-5, 1.0e-2]   # log scale
+    batch_size: [16, 32, 64]
+    epochs: [50, 150]
+ 
+  loss: binary_crossentropy
+  optimizer: Adam
+ 

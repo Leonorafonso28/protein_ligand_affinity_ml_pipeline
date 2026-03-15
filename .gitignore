@@ -13,5 +13,17 @@ venv/
 # Jupyter / IPython
 .ipynb_checkpoints
 
+# Data
+data/
+models/
+checkpoints/
+*.h5
+*.pt
+*.ckpt
+
+# Logs
+logs/
+*.log
+
 # OS files
 .DS_Store

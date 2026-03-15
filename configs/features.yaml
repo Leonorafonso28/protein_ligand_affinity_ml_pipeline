@@ -1,0 +1,79 @@
+# 09_ChEMBL_bioactivities.py
+chembl_bioactivities:
+  input:
+    uniprot_mappings: data/interim/uniprot_mappings.csv
+    uniprot_cif_mappings: data/interim/uniprot_cif_mappings.csv
+    filtered_df: data/interim/filtered_df.csv
+  output:
+    uniprot_pdb: data/interim/uniprot_pdb.csv
+    merged_data: data/features/merged_data_filtered.csv
+    merged_data_chembl_id: data/features/merged_data_filtered_ChEMBL_ID.csv
+    activities: data/features/activities_data.csv
+    chembl_activities: data/features/ChEMBL_activities.csv
+  api_fields:                            # Fields retrieved from ChEMBL activity API
+    - target_type
+    - molecule_chembl_id
+    - target_chembl_id
+    - type
+    - pchembl_value
+    - standard_value
+    - standard_units
+    - standard_relation
+    - target_organism
+    - assay_type
+ 
+# 10_01_filter_chembl_ki_data.py
+ki_filtering:
+  input_file: data/features/ChEMBL_activities.csv
+  output_file: data/features/deduplicated_filtered_Ki_dataset.csv
+ 
+  # ChEMBL filters
+  target_type: "SINGLE PROTEIN"
+  assay_type: "B"                        # Binding assays only
+  activity_type: "Ki"
+  standard_relation: "="
+  standard_units: "nM"
+  min_standard_value: 0                  # Exclude zero or negative values
+ 
+  # Deduplication
+  zscore_threshold: 1.0                  # Absolute z-score cutoff to define outliers
+  dedup_subset: ["SEQUENCE_1L", "PDB ID", "Chain ID"]
+  representative_subset: ["molecule_chembl_id", "pKi", "SEQUENCE_1L"]
+ 
+# 10_02_filter_chembl_pchembl_data.py
+pchembl_filtering:
+  input_file: data/features/ChEMBL_activities.csv
+  output_file: data/features/deduplicated_filtered_pchembl_dataset.csv
+ 
+  # ChEMBL filters
+  target_type: "SINGLE PROTEIN"
+  assay_type: "B"                        # Binding assays only
+  require_pchembl: true                  # Only keep rows with non-null pchembl_value
+ 
+  # Deduplication
+  zscore_threshold: 1.0                  # Absolute z-score cutoff to define outliers
+  dedup_subset: ["SEQUENCE_1L", "PDB ID", "Chain ID"]
+  representative_subset: ["molecule_chembl_id", "pchembl_value", "SEQUENCE_1L"]
+ 
+# 11_01_feature_ligand_protein_extraction_pchembl.py
+# 11_02_feature_ligand_protein_extraction_pki.py
+feature_extraction:
+  pchembl:
+    input_file: data/features/deduplicated_filtered_pchembl_dataset.csv
+    output_file: data/features/features_combined_ligand_protein_pchembl.csv
+  pki:
+    input_file: data/features/deduplicated_filtered_Ki_dataset.csv
+    output_file: data/features/features_combined_ligand_protein_pKi.csv
+ 
+  required_columns: ["CANONICAL_SMILES", "SEQUENCE_1L"]
+ 
+  esm2:
+    model: esm2_t33_650M_UR50D           # ESM-2 model variant
+    repr_layer: 33                       # Representation layer to extract embeddings from
+    embedding_dim: 1280                  # Output embedding dimension
+    skip_sequences_with: ["X"]          # Skip sequences containing ambiguous residues
+    embedding_col_prefix: "ESM2_"       # Prefix for embedding column names
+ 
+  rdkit:
+    featurizer: RDKitDescriptors         # DeepChem featurizer used for ligand descriptors
+ 

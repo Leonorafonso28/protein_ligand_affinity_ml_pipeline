@@ -1,0 +1,70 @@
+# 01_download_pdb_info.py
+pdb_download:
+  max_entries: 1000                      # Maximum number of PDB entries to download
+  request_timeout: 10                    # Timeout in seconds for FTP/HTTP requests
+  output_dir: data/raw/pdb_files
+  protein_data_output: data/interim/protein_data.csv
+  pdb_ids_output: data/raw/pdb_current_19_02_2025.txt
+  file_formats: ["ent", "cif", "pdb"]   # Download priority order
+ 
+# 02_clean_pdb_and_cif_files.py / 03_clean_ent_files.py
+cleaning:
+  input_dir: data/raw/pdb_files
+  converted_dir: data/interim/converted_cif_to_ent_files
+  cleaned_dir: data/interim/cleaned_pdb_files
+  uniprot_output_cif: data/interim/uniprot_cif_mappings.csv
+  uniprot_output_ent: data/interim/uniprot_mappings.csv
+  remove_water: true                     # Remove HOH residues
+  max_chain_name_length: 1               # PDB/ENT format supports only 1-character chain names
+ 
+# 05_split_ent_by_chain_ambiguous.py
+chain_splitting:
+  input_dir: data/interim/cleaned_pdb_files
+  output_dir: data/interim/split_pdb_files
+  fasta_dir: data/interim/fasta_sequences
+  ligands_output: data/interim/ligands_per_chain.csv
+  ambiguity_threshold: 0.0              # Maximum allowed fraction of ambiguous residues per chain (0 = none allowed)
+  ambiguous_residues: ["ASX", "GLX", "UNK", "X", "B", "Z"]
+ 
+# 06_filter_ligands_get_smiles.py
+ligand_filtering:
+  input_file: data/interim/ligands_per_chain.csv
+  filtered_output: data/interim/filtered_ligands.csv
+  excluded_output: data/interim/excluded_ligands.csv
+ 
+  # Predefined list of ions, metals, solvents and buffers to exclude
+  excluded_ligands: [
+    "FE2", "ZN2", "CU", "CA", "MG", "HOH", "DOD",
+    "PO4", "SO4", "FE", "ZN", "K", "CL", "NI",
+    "CO", "NA", "NH2", "NH3"
+  ]
+ 
+  # Keywords in ligand name or type that trigger exclusion
+  forbidden_words: ["ion", "metal", "solvent", "water", "buffer", "salt"]
+ 
+  # Ligand types to exclude
+  excluded_types: ["dna", "rna", "peptide linking", "terminus"]
+ 
+  # Drug-likeness filters (extended Lipinski)
+  drug_likeness:
+    max_molecular_weight: 750           # Daltons
+    max_rotatable_bonds: 15
+    max_h_donors: 10
+    max_h_acceptors: 15
+    max_failed_criteria: 1              # Exclude ligand if it fails more than this number of criteria
+ 
+# 07_filtered_proteins.py
+protein_filtering:
+  ligands_per_chain: data/interim/ligands_per_chain.csv
+  filtered_ligands: data/interim/filtered_ligands.csv
+  protein_data: data/interim/protein_data.csv
+  output_file: data/interim/filtered_df.csv
+  min_chain_length: 30                  # Minimum number of amino acids per chain
+ 
+# 08_filtering_FASTA_ent_files.py
+fasta_ent_filtering:
+  merged_data: data/interim/filtered_df.csv
+  fasta_dir: data/interim/fasta_sequences
+  pdb_dir: data/interim/split_pdb_files
+  filtered_fasta_dir: data/interim/fasta_sequences_filtered
+  filtered_pdb_dir: data/interim/split_pdb_files_filtered
