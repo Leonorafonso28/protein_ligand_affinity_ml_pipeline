@@ -187,7 +187,7 @@ else:
 
 #  Save data to CSV
 df = pd.DataFrame(protein_data, columns=["PDB_ID", "Experimental_Method", "Organism", "Resolution"])
-df.to_csv("data/intermin/protein_data.csv", index=False)
+df.to_csv("data/interim/protein_data.csv", index=False)
 
 print("\n First few rows of the dataset:")
 print(df.head())
