@@ -197,9 +197,11 @@ Two parallel affinity datasets are maintained throughout the pipeline:
 Both datasets apply an activity threshold of **pAffinity ≥ 6.5** (≈ 316 nM), a commonly used cutoff for distinguishing active compounds from weak binders in drug discovery.
 
 **Conservative activity deduplication**
+
 Conflicting bioactivity measurements for identical *(molecule, protein)* pairs are resolved using **z-score filtering**. Measurements within \|z\| ≤ 1 of the group mean are retained, and when all values are outliers the observation closest to the mean is preserved. This conservative approach reduces label noise compared with the standard ChEMBL curation threshold.
 
 **Feature representation**
+
 The modelling pipeline combines:
 
 - **RDKit molecular descriptors** (~200 features) capturing interpretable physicochemical properties of ligands
@@ -208,11 +210,13 @@ The modelling pipeline combines:
 This hybrid representation provides a strong baseline for binding affinity prediction while enabling inference for proteins lacking experimentally determined structures.
 
 **Bias-aware evaluation**
+
 Model performance is evaluated using multiple data partitions including **blind protein** and **blind ligand** splits. These partitions reflect key generalisation challenges in pharmaceutical ML: interpolation within known data, extrapolation to unseen protein targets, and extrapolation to novel chemical scaffolds.
 
 Together, these design choices prioritise label reliability, scalable feature representations, and evaluation protocols aligned with real-world drug discovery scenarios.
 
 ## **Evaluation Framework**
+
 Model performance is assessed across six complementary dataset partitions, designed to test robustness under realistic drug discovery generalization scenarios:
 - Random split
 - Scaffold split
