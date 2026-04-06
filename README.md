@@ -54,14 +54,14 @@ The pipeline consists of six major stages:
 
 3. **Protein and ligand processing**
    - Chain splitting
-   - residue normalisation
-   - ligand filtering
+   - Residue normalisation
+   - Ligand filtering
    - SMILES retrieval
 
 4. **Bioactivity integration**
    - ChEMBL cross-referencing
-   - pKi / pChEMBL label curation
-   - duplicate resolution
+   - PKi / pChEMBL label curation
+   - Duplicate resolution
 
 5. **Feature engineering**
    - RDKit molecular descriptors
@@ -70,7 +70,7 @@ The pipeline consists of six major stages:
 6. **Model training and evaluation**
    - XGBoost and DNN classifiers
    - Optuna hyperparameter optimisation
-   - multi-axis generalisation evaluation
+   - Multi-axis generalisation evaluation
 
 <img src="results/figures/workflow_diagram.png" alt="Workflow Diagram" width="400" />
 
