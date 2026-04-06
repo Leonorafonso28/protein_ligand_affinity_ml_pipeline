@@ -256,9 +256,13 @@ pip install -r requirements.txt
 python pipeline/pipeline_run_all.py
 
 ### Or run individual stages:
+
 python pipelines/pipeline_data_preparation.py   # Data preparation
+
 python pipelines/pipeline_features.py           # Feature extraction
+
 python pipelines/pipeline_preprocessing.py      # Preprocessing
+
 python pipelines/pipeline_models.py             # ML models
 
 ### 4. (Optional) Run with Docker
