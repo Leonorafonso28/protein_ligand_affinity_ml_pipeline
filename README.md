@@ -233,10 +233,10 @@ All models are evaluated on five held-out partitions (validation is used only du
 
 ## **Quick Start**
 
-## Quick Start
-
 ### 1. Clone the repository
+
 git clone https://github.com/Leonorafonso28/protein_ligand_affinity_ml_pipeline
+
 cd protein_ligand_affinity_ml_pipeline
 
 ### 2. Set up the environment
