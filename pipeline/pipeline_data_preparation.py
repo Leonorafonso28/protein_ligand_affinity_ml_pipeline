@@ -12,15 +12,15 @@ logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 DATA_PREP_STEPS = [
-    "src/data_preparation/00_validation_pdbs.py",
-    "src/data_preparation/01_download_pdb_info.py",
-    "src/data_preparation/02_clean_pdb_and_cif_files.py",
-    "src/data_preparation/03_clean_ent_files.py",
-    "src/data_preparation/04_convert_cif_to_ent.py",
-    "src/data_preparation/05_split_ent_by_chain_ambiguous.py",
-    "src/data_preparation/06_filter_ligands_get_smiles.py",
-    "src/data_preparation/07_filtered_proteins.py",
-    "src/data_preparation/08_filtering_FASTA_ent_files.py"
+    "scr/data_preparation/00_validation_pdbs.py",
+    "scr/data_preparation/01_download_pdb_info.py",
+    "scr/data_preparation/02_clean_pdb_and_cif_files.py",
+    "scr/data_preparation/03_clean_ent_files.py",
+    "scr/data_preparation/04_convert_cif_to_ent.py",
+    "scr/data_preparation/05_split_ent_by_chain_ambiguous.py",
+    "scr/data_preparation/06_filter_ligands_get_smiles.py",
+    "scr/data_preparation/07_filtered_proteins.py",
+    "scr/data_preparation/08_filtering_FASTA_ent_files.py"
 ]
 
 def run_step(step_path: str):

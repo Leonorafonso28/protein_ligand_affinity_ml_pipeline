@@ -12,14 +12,14 @@ logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 MODEL_STEPS = [
-    "src/models/XGBoost/pki/14_XGBoost_pki.py",
-    "src/models/XGBoost/pki/15_XGBoost_pki_evaluation.py",
-    "src/models/XGBoost/pchembl/16_XGBoost_pchembl.py",
-    "src/models/XGBoost/pchembl/17_XGBoost_pchembl_evaluation.py",
-    "src/models/DNN/pki/18_DNN_pki.py",
-    "src/models/DNN/pki/19_DNN_pki_evaluation.py",
-    "src/models/DNN/pchembl/20_DNN_pchembl.py",
-    "src/models/DNN/pchembl/21_DNN_pchembl_evaluation.py",
+    "scr/models/XGBoost/pki/14_XGBoost_pki.py",
+    "scr/models/XGBoost/pki/15_XGBoost_pki_evaluation.py",
+    "scr/models/XGBoost/pchembl/16_XGBoost_pchembl.py",
+    "scr/models/XGBoost/pchembl/17_XGBoost_pchembl_evaluation.py",
+    "scr/models/DNN/pki/18_DNN_pki.py",
+    "scr/models/DNN/pki/19_DNN_pki_evaluation.py",
+    "scr/models/DNN/pchembl/20_DNN_pchembl.py",
+    "scr/models/DNN/pchembl/21_DNN_pchembl_evaluation.py",
 ]
    
 def run_step(step_path: str):

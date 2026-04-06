@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 FEATURE_STEPS = [
-    "src/features/09_ChEMBL_bioactivities.py",
-    "src/features/10_01_filter_chembl_ki_data.py.",
-    "src/features/10_02_filter_chembl_pchembl_data.py",
-    "src/features/11_01_feature_ligand_protein_extraction_pki.py",
-    "src/features/11_02_feature_ligand_protein_extraction_pchembl.py"
+    "scr/features/09_ChEMBL_bioactivities.py",
+    "scr/features/10_01_filter_chembl_ki_data.py.",
+    "scr/features/10_02_filter_chembl_pchembl_data.py",
+    "scr/features/11_01_feature_ligand_protein_extraction_pki.py",
+    "scr/features/11_02_feature_ligand_protein_extraction_pchembl.py"
 ]
    
 def run_step(step_path: str):

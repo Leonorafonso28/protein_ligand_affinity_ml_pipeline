@@ -5,7 +5,7 @@ from rdkit import Chem
 from rdkit.Chem import Descriptors
 
 # Load dataset
-df = pd.read_csv('data/intermin/ligands_per_chain.csv')
+df = pd.read_csv('data/interim/ligands_per_chain.csv')
 
 # Remove rows where LIGAND_ID is "NO_LIGAND"
 df = df[df['LIGAND_ID'] != "NO_LIGAND"]
@@ -157,8 +157,8 @@ pd.DataFrame(ligand_data, columns=["LIGAND_ID", "LIGAND_TYPE", "NAME", "CANONICA
 pd.DataFrame(excluded_due_to_criteria, columns=["LIGAND_ID", "NAME", "CANONICAL_SMILES", "MW", "ROTATABLE_BONDS", "H_DONORS", "H_ACCEPTORS"]).to_csv("data/intermin/excluded_ligands.csv", index=False)
 
 # Print summary
-print("\n Filtered ligands saved to 'data/intermin/filtered_ligands.csv'")
-print(" Excluded ligands saved to 'data/intermin/excluded_ligands.csv'")
+print("\n Filtered ligands saved to 'data/interim/filtered_ligands.csv'")
+print(" Excluded ligands saved to 'data/interim/excluded_ligands.csv'")
 
 # Show unique ligand types in filtered ligands
 ligand_data_df = pd.DataFrame(ligand_data, columns=["LIGAND_ID", "LIGAND_TYPE", "NAME", "CANONICAL_SMILES", "INCHIKEY"])

@@ -5,8 +5,8 @@ from Bio import PDB  # BioPython for PDB cleaning
 
 # Directories
 input_dir = "data/raw/pdb_files"  # Folder containing CIF files
-converted_dir = "data/intermin/converted_cif_to_ent_files"  # Folder for converted ENT files
-cleaned_dir = "data/intermin/cleaned_pdb_files"  # Folder for cleaned ENT files
+converted_dir = "data/interim/converted_cif_to_ent_files"  # Folder for converted ENT files
+cleaned_dir = "data/interim/cleaned_pdb_files"  # Folder for cleaned ENT files
 os.makedirs(converted_dir, exist_ok=True)
 os.makedirs(cleaned_dir, exist_ok=True)
 
@@ -114,7 +114,7 @@ for pdb_file in os.listdir(converted_dir):
 
 # Save UniProt data to CSV
 df_uniprot = pd.DataFrame(uniprot_data, columns=["PDB_ID", "Chain", "UniProt_ID", "PDB_Start", "PDB_End", "UniProt_Start", "UniProt_End"])
-df_uniprot.to_csv("data/intermin/uniprot_cif_mappings.csv", index=False)
+df_uniprot.to_csv("data/interim/uniprot_cif_mappings.csv", index=False)
 
 # Report problematic CIF files
 if problematic_cifs:

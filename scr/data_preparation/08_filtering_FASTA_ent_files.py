@@ -3,11 +3,11 @@ import shutil
 import pandas as pd
 
 #Directories
-merged_data_path = "data/intermin/filtered_df.csv"
-fasta_dir = "data/intermin/fasta_sequences"
-pdb_dir = "data/intermin/split_pdb_files"
-filtered_fasta_dir = "data/intermin/fasta_sequences_filtered"
-filtered_pdb_dir = "data/intermin/split_pdb_files_filtered"
+merged_data_path = "data/interim/filtered_df.csv"
+fasta_dir = "data/interim/fasta_sequences"
+pdb_dir = "data/interim/split_pdb_files"
+filtered_fasta_dir = "data/interim/fasta_sequences_filtered"
+filtered_pdb_dir = "data/interim/split_pdb_files_filtered"
 
 os.makedirs(filtered_fasta_dir, exist_ok=True)
 os.makedirs(filtered_pdb_dir, exist_ok=True)

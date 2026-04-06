@@ -4,7 +4,7 @@ from Bio import PDB
 
 # Directories
 input_dir = "data/raw/pdb_files"
-output_dir = "data/intermin/cleaned_pdb_files"
+output_dir = "data/interim/cleaned_pdb_files"
 os.makedirs(output_dir, exist_ok=True)
 
 # Data storage for UniProt mappings
@@ -79,7 +79,7 @@ for pdb_file in os.listdir(input_dir):
 
 # Convert extracted UniProt data into a DataFrame and save it
 df_uniprot = pd.DataFrame(uniprot_data, columns=["PDB_ID", "Chain", "UniProt_ID", "PDB_Start", "PDB_End", "UniProt_Start", "UniProt_End"])
-df_uniprot.to_csv("data/intermin/uniprot_mappings.csv", index=False)
+df_uniprot.to_csv("data/interim/uniprot_mappings.csv", index=False)
 
 # Print Summary of PDBs with no Uniprot IDs
 if no_uniprot_pdbs:

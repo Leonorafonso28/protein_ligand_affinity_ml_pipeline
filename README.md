@@ -82,11 +82,16 @@ protein-ligand-binding-affinity-database-&-ML-pipeline
 ├── README.md                     # Project overview
 ├── LICENSE                       # License file
 ├── .gitignore                    # Files/folders to ignore in git
+├── .gitatributes                 # Configuration files               
 ├── requirements.txt              # Python dependencies
 ├── environment.yml               # Conda environment (optional)
 ├── Dockerfile                    # Docker configuration for reproducibility
 │
 ├── configs/                      # Configuration files
+│   ├── data_preparation.yaml
+|   ├── features.yaml
+|   ├── preprocessing.yaml
+│   └── models.yaml  
 │
 ├── data/                         # Project data
 │   ├── raw/                      # Original, unmodified data
@@ -146,7 +151,7 @@ protein-ligand-binding-affinity-database-&-ML-pipeline
 |   |       ├── pki
 │   │       └── pchemb/           
 │   │
-│   └── models        #ML models
+│   └── models        # ML models
 │       ├── xgboost
 |       |   ├── pki/
 │       │   └── pchemb/ 
@@ -154,30 +159,29 @@ protein-ligand-binding-affinity-database-&-ML-pipeline
 |           ├── pki/
 │           └── pchemb/         
 │
-├── pipelines/                    # Scripts to run full or partial pipelines
+├── pipeline/                    # Scripts to run full or partial pipelines
 │   ├── pipeline_data_preparation.py
-│   ├── pipeline_features.py.py
+│   ├── pipeline_features.py
 |   ├── pipeline_preprocessing.py
 |   ├── pipeline_models.py
 │   └── pipeline_run_all.py                  
 │
 ├── notebooks/                     # Jupyter notebooks for EDA or visualization
-│   ├── exploratory_data_analysis.ipynb
-|   ├── leakage_analysis.ipynb
-|   ├── ligand_chemistry_analysis.ipynb
-|   ├── protein_embeddings_analysis.ipynb
-|   └── model_analysis.ipynb
+│   ├── 01_Exploratory_Data_Analysis.ipynb
+|   ├── 02_Leakage_Analysis.ipynb
+|   ├── 03_Ligand_Chemistry_Analysis.ipynb
+|   └── 04_Protein_Embeddings_Analysis.ipynb
 │
 ├── results/                       # Generated results like tables and figures
 │   ├── tables/
 │   └── figures/
 │
 └── docs/                          # Additional documentation
-    ├── pipeline_architecture.md
-    ├── dataset_card.md
-    ├── reproducibility.md
-    ├── feature_engineering.md
-    └── model_strategy.md
+    ├── Pipeline_Architecture.md
+    ├── Dataset_Card.md
+    ├── Reproducibility.md
+    ├── Feature_Engineering.md
+    └── Model_Strategy.md
 ```
 ## **Modeling Design Decisions**
 
@@ -232,8 +236,8 @@ All models are evaluated on five held-out partitions (validation is used only du
 ## Quick Start
 
 ### 1. Clone the repository
-git clone https://github.com/<your-username>/protein-ligand-binding-affinity-database-&-ML-pipeline
-cd protein-ligand-binding-affinity-database-&-ML-pipeline
+git clone https://github.com/Leonorafonso28/protein_ligand_affinity_ml_pipeline
+cd protein_ligand_affinity_ml_pipeline
 
 ### 2. Set up the environment
 
@@ -245,7 +249,7 @@ conda activate protein_ligand_affinity
 pip install -r requirements.txt
 
 ### 3. Run the full pipeline
-python pipelines/pipeline_run_all.py
+python pipeline/pipeline_run_all.py
 
 ### Or run individual stages:
 python pipelines/pipeline_data_preparation.py   # Data preparation

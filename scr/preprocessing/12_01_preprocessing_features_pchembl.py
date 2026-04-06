@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-features_total = pd.read_csv("features_combined_ligand_protein_pchembl.csv")
+features_total = pd.read_csv("data/features/features_combined_ligand_protein_pchembl.csv")
 print(f"Initial shape before equal organisms: {features_total.shape}")
 
 #Kepp only rows where Organism (PDB) == to target_organism (ChEMBL)
@@ -43,5 +43,5 @@ features_total_nv = features_total_numerics.loc[:, features_total_numerics.var()
 
 # Save dataset
 final_dataset = pd.concat([features_meta, features_total_nv], axis=1)
-final_dataset.to_csv("features_processed_pchembl.csv", index=False)
+final_dataset.to_csv("data/processed/features_processed_pchembl.csv", index=False)
 print(f"Final shape: {features_total_nv.shape}") 

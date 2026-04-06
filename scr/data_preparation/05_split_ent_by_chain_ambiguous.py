@@ -168,11 +168,11 @@ def process_all_pdb_files(directory, output_dir, fasta_dir):
             all_data.extend(data)
     
     df = pd.DataFrame(all_data, columns=['PDB ID', 'Chain ID', 'SEQUENCE_3L_PDB', 'SEQUENCE_3L_STD', 'SEQUENCE_1L', 'POSITIONS', 'LIGAND_ID'])
-    df.to_csv('data/intermin/ligands_per_chain.csv', index=False)
+    df.to_csv('data/interim/ligands_per_chain.csv', index=False)
     print("Processing complete. Data saved to ligands_per_chain.csv and FASTA files generated.")
     return df
 
-pdb_directory = 'data/intermin/cleaned_pdb_files'
-output_directory = 'data/intermin/split_pdb_files'
-fasta_directory = 'data/intermin/fasta_sequences'
+pdb_directory = 'data/interim/cleaned_pdb_files'
+output_directory = 'data/interim/split_pdb_files'
+fasta_directory = 'data/interim/fasta_sequences'
 df = process_all_pdb_files(pdb_directory, output_directory, fasta_directory)

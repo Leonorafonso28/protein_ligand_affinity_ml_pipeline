@@ -5,16 +5,16 @@ from collections import defaultdict
 bioactivities_api = new_client.activity
 
 # Directories
-uniprot_data = pd.read_csv("data/intermin/uniprot_mappings.csv")
-uniprot_data_cif = pd.read_csv("data/intermin/uniprot_cif_mappings.csv")
-filtered_df = pd.read_csv("data/intermin/filtered_df.csv")
+uniprot_data = pd.read_csv("data/interim/uniprot_mappings.csv")
+uniprot_data_cif = pd.read_csv("data/interim/uniprot_cif_mappings.csv")
+filtered_df = pd.read_csv("data/interim/filtered_df.csv")
 
 # Concatenate uniprot data
 uniprot_data = pd.concat([uniprot_data, uniprot_data_cif], ignore_index=True).drop_duplicates()
 
 uniprot_pdb = uniprot_data[uniprot_data['UniProt_ID'].notna()]
 
-uniprot_pdb.to_csv("data/intermin/uniprot_pdb.csv", index=False)
+uniprot_pdb.to_csv("data/interim/uniprot_pdb.csv", index=False)
 
 # Join filtered_df 
 uniprot_pdb = uniprot_pdb.rename(columns={"PDB_ID": "PDB ID", "Chain": "Chain ID"})

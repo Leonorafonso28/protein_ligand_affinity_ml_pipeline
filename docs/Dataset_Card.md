@@ -182,9 +182,9 @@ All splits are performed at the level of **unique molecular identities** (SMILES
 
 | Overlap check | Blind | Blind Protein | Blind Ligand |
 |---------------|-------|---------------|--------------|
-| Protein–ligand pair overlap with Train | ✅ 0 | ✅ 0 | ✅ 0 |
-| Sequence overlap with Train | ✅ 0 | ✅ 0 | ⚠️ Expected (by design) |
-| SMILES overlap with Train | ✅ 0 | ⚠️ Expected (by design) | ✅ 0 |
+| Protein–ligand pair overlap with Train | 0 | 0 | 0 |
+| Sequence overlap with Train | 0 | 0 | Expected (by design) |
+| SMILES overlap with Train | 0 |  Expected (by design) | 0 |
 
 **Expected overlaps (by design):**
 

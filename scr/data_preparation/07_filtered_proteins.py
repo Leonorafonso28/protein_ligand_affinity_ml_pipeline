@@ -1,10 +1,10 @@
 import pandas as pd 
 
 #Directory
-filtered_ligands_path = "data/intermin/filtered_ligands.csv"
-ligands_per_chain_path = "data/intermin/ligands_per_chain.csv"
-protein_data_path = "data/intermin/protein_data.csv"
-output_path = "data/intermin/expanded_filtered_dataset.csv"
+filtered_ligands_path = "data/interim/filtered_ligands.csv"
+ligands_per_chain_path = "data/interim/ligands_per_chain.csv"
+protein_data_path = "data/interim/protein_data.csv"
+output_path = "data/interim/expanded_filtered_dataset.csv"
 
 #Remove NO_LIGAND
 df=pd.read_csv(ligands_per_chain_path)
@@ -36,4 +36,4 @@ protein_data_filtered = protein_data[protein_data["PDB_ID"].isin(merged_df["PDB 
 final_df = merged_df.merge(protein_data_filtered[["PDB_ID", "Experimental_Method", "Resolution", "Organism"]], 
                            left_on="PDB ID", right_on="PDB_ID", how="left")
 
-final_df.to_csv("data/intermin/filtered_df.csv", index=False)
+final_df.to_csv("data/interim/filtered_df.csv", index=False)
